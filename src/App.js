@@ -10,6 +10,7 @@ import Donate from "./components/Donate";
 import PageNotFound from "./components/PageNotFound";
 import logo from "./images/spr_sp_logo.png";
 import { useState, useEffect } from "react";
+import useBreakpoint from "./components/Breakpoint";
 
 import './style/custom.scss';
 import {} from "./style/navbar.css"
@@ -22,15 +23,7 @@ import {
 } from "react-router-dom";
 
 export default function App() {
-    const usualNavWidth = 540;
-    const [ breakpoint, setBreakpoint ] = useState( {
-        size:
-            (window.innerWidth < usualNavWidth) ? "small" :             // mobile
-            (window.innerWidth > (usualNavWidth * 3)) ? "large" :       // kiosk
-            "default",                                                  // regular
-        screenWidth: window.innerWidth,
-        screenHeight: window.innerHeight
-    });
+    const breakpoint = useBreakpoint();
     const [ displayNavMobile, setDisplayNavMobile ] = useState(false);
     const [ textNavMobile, setTextNavMobile ] = useState("Menu");
 
@@ -39,25 +32,6 @@ export default function App() {
         setTextNavMobile((textNavMobile === "Menu") ? "Close" : "Menu");
         console.log("Mobile display?", displayNavMobile);
     }
-
-    useEffect(() => {
-        const checkWidth = () => {
-            setBreakpoint({
-                size:
-                    (window.innerWidth < usualNavWidth) ? "small" :              // mobile
-                    (window.innerWidth > (usualNavWidth * 3)) ? "large" :   // kiosk
-                    "default",                                              // regular
-                screenWidth: window.innerWidth
-            });
-            console.log("Screen size", breakpoint.size);
-        }
-
-        window.addEventListener("resize", checkWidth);
-
-        return() => {
-            window.removeEventListener("resize", checkWidth);
-        }
-    })
 
     return (
         <ThemeProvider theme={theme}>  
@@ -68,7 +42,7 @@ export default function App() {
                             <button
                                 class={`
                                     navbutton
-                                    ${ breakpoint.size === "large" ? "navbuttonLarge" : "" } 
+                                    ${ breakpoint === "large" ? "navbuttonLarge" : "" } 
                                 `}
                                 type="button"
                                 style={{padding: 1.5}}
@@ -77,8 +51,8 @@ export default function App() {
                                 <img src={logo} className="home_logo" alt="poppy logo"/>
                             </button>
                         </Link>
-                        <div className={` ${ (breakpoint.size === "small") ? "topnavMobile" : "" } `}>
-                            {breakpoint.size === "small" && (
+                        <div className={` ${ (breakpoint === "small") ? "topnavMobile" : "" } `}>
+                            {breakpoint === "small" && (
                                 <button
                                     class="navbutton navbuttonDisplay"
                                     type="button"
@@ -87,11 +61,11 @@ export default function App() {
                                     {textNavMobile}
                                 </button>
                             )}
-                            {((breakpoint.size !== "small") || displayNavMobile) && (
-                                <div className={` ${ (breakpoint.size === "small") ? "topnavMobile" : "" } `}>
+                            {((breakpoint !== "small") || displayNavMobile) && (
+                                <div className={` ${ (breakpoint === "small") ? "topnavMobile" : "" } `}>
                                     <Link to="/chatbot">
                                         <button
-                                            class={` navbutton ${ breakpoint.size === "large" ? "navbuttonLarge" : "" } `}
+                                            class={` navbutton ${ breakpoint === "large" ? "navbuttonLarge" : "" } `}
                                             type="button"
                                         >
                                             Chat
@@ -99,7 +73,7 @@ export default function App() {
                                     </Link>
                                     <Link to="/maps">
                                         <button
-                                            class={` navbutton ${ breakpoint.size === "large" ? "navbuttonLarge" : "" } `}
+                                            class={` navbutton ${ breakpoint === "large" ? "navbuttonLarge" : "" } `}
                                             type="button"
                                         >
                                             Maps
@@ -107,7 +81,7 @@ export default function App() {
                                     </Link>
                                     <Link to="/about">
                                         <button
-                                            class={` navbutton ${ breakpoint.size === "large" ? "navbuttonLarge" : "" } `}
+                                            class={` navbutton ${ breakpoint === "large" ? "navbuttonLarge" : "" } `}
                                             type="button"
                                         >
                                             Learn More
@@ -115,7 +89,7 @@ export default function App() {
                                     </Link>
                                     <Link to="/contact">
                                         <button
-                                            class={` navbutton ${ breakpoint.size === "large" ? "navbuttonLarge" : "" } `}
+                                            class={` navbutton ${ breakpoint === "large" ? "navbuttonLarge" : "" } `}
                                             type="button"
                                         >
                                             Contact
@@ -124,7 +98,7 @@ export default function App() {
                                     {/* later change link to /Donate */}
                                     <Link to="/Donate">
                                         <button
-                                            class={` navbutton ${ breakpoint.size === "large" ? "navbuttonLarge" : "" } `}
+                                            class={` navbutton ${ breakpoint === "large" ? "navbuttonLarge" : "" } `}
                                             type="button"
                                         >
                                             {/* donation and support tab */}
