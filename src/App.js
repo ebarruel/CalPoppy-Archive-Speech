@@ -42,9 +42,6 @@ export default function App() {
 
     useEffect(() => {
         const checkWidth = () => {
-            // not working rn, using default nav width to calculate
-            // const navWidth = document.getElementById("nav").style.width;
-    
             setBreakpoint({
                 size:
                     (window.innerWidth < usualNavWidth) ? "small" :              // mobile
