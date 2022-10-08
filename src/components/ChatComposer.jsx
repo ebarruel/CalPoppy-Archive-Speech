@@ -78,7 +78,11 @@ export default function ChatComposer({ onSend }) {
                     <button type="button" className="sendButtonStyle" onClick={() => {console.log("input:", input); setOnscreenKey(!onscreenKey)}}>
                         <i class="bi bi-keyboard"></i>
                     </button>
-                    <button type="button" className="sendButtonStyle">
+                    <button
+                        type="button"
+                        onClick={handleUserSpeaking}
+                        className="sendButtonStyle"
+                    >
                         <i class="bi bi-mic"></i>
                     </button>
                     <button type="submit" className="sendButtonStyle">
