@@ -52,7 +52,7 @@ export function SpeechIn(setInput, userSpeaking) {
         console.log("Poppy has stopped listening.")
     }
 
-    const useResult = (e) => {
+    const useEffect = (e) => {
         const newResult = (e) => {
             console.log(e);
         }
@@ -81,5 +81,14 @@ export function SpeechIn(setInput, userSpeaking) {
     //     }
     // )
 
-    userSpeaking ? recog.start() : recog.stop();
+    if (userSpeaking) {
+        recog.start();
+        console.log("Poppy is listening");
+    }
+    else {
+        recog.stop();
+        console.log("Poppy has stopped listening.");
+    }
+
+    return null;
 }

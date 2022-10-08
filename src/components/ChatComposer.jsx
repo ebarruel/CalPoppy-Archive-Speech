@@ -17,7 +17,7 @@ export default function ChatComposer({ onSend }) {
     const keyboard = useRef();
 
     // speech variables
-    const [userSpeaker, setUserSpeaking] = useState(false);
+    const [userSpeaking, setUserSpeaking] = useState(false);
 
     // keyboard functionality
     const onChange = input => {
@@ -48,7 +48,8 @@ export default function ChatComposer({ onSend }) {
     // speech functionality
     const handleUserSpeaking = userSpeaking => {
         setUserSpeaking(userSpeaking => !userSpeaking);
-        <SpeechIn setInput={setInput} userSpeaking={userSpeaking} />
+        console.log("userSpeaking:", userSpeaking);
+        // return <SpeechIn setInput={setInput} userSpeaking={userSpeaking} />
     }
 
     // Takes the message from the content editable field and sends it out
@@ -78,12 +79,27 @@ export default function ChatComposer({ onSend }) {
                     <button type="button" className="sendButtonStyle" onClick={() => {console.log("input:", input); setOnscreenKey(!onscreenKey)}}>
                         <i class="bi bi-keyboard"></i>
                     </button>
+                    {/* <SpeechIn
+                        type="button"
+                        onClick={handleUserSpeaking}
+                        className="sendButtonStyle"
+                        setInput={input}
+                        userSpeaking={userSpeaking}
+                    >
+                        <i class="bi bi-mic"></i>
+                    </SpeechIn> */}
                     <button
                         type="button"
                         onClick={handleUserSpeaking}
                         className="sendButtonStyle"
                     >
                         <i class="bi bi-mic"></i>
+                        {userSpeaking && (
+                            <SpeechIn
+                                setInput={input}
+                                userSpeaking={userSpeaking}
+                            />
+                        )}
                     </button>
                     <button type="submit" className="sendButtonStyle">
                         <i class="bi bi-send"></i>
