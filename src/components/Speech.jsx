@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 
 /* implemented with Web Speech API: https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API */
 const synth = window.speechSynthesis;
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recog = new SpeechRecognition();
 
 /******* TEXT TO SPEECH *******/
