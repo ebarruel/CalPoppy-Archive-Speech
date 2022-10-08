@@ -6,15 +6,20 @@ import "../style/chatComposer.css";
 import "../style/text.css";
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
+import { SpeechIn } from "./Speech";
 
 export default function ChatComposer({ onSend }) {
-
-    // keyboard functionality
-    const [onscreenKey, setOnscreenKey] = useState(false);
     const [input, setInput] = useState("");
+
+    // keyboard variables
+    const [onscreenKey, setOnscreenKey] = useState(false);
     const [layout, setLayout] = useState("default");
     const keyboard = useRef();
 
+    // speech variables
+    const [userSpeaker, setUserSpeaking] = useState(false);
+
+    // keyboard functionality
     const onChange = input => {
         setInput(input);
         // console.log("Input changed", input);
@@ -39,6 +44,12 @@ export default function ChatComposer({ onSend }) {
             keyboard.current.setInput(input);
         }
     };
+
+    // speech functionality
+    const handleUserSpeaking = userSpeaking => {
+        setUserSpeaking(userSpeaking => !userSpeaking);
+        <SpeechIn setInput={setInput} userSpeaking={userSpeaking} />
+    }
 
     // Takes the message from the content editable field and sends it out
     function sendMessage(e) {
