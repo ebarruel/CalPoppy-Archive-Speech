@@ -2,7 +2,6 @@
 
 /** @jsxImportSource @emotion/react */
 import { useRef, useState } from "react";
-import { Send } from "react-feather";
 import "../style/chatComposer.css";
 import "../style/text.css";
 import Keyboard from 'react-simple-keyboard';
@@ -58,7 +57,7 @@ export default function ChatComposer({ onSend }) {
 
     return (
         <div>
-            <div className="menuBarStyle ChatComposer">
+            <div className="menuBarStyle">
                 <form className="contentStyle" onSubmit={sendMessage}>
                     <input
                         className="scrollableY txtFieldStyle"
@@ -72,8 +71,7 @@ export default function ChatComposer({ onSend }) {
                         <i class="bi bi-mic"></i>
                     </button>
                     <button type="submit" className="sendButtonStyle">
-                        <Send size={20} />
-                        <p className="buttonTextStyle">Send</p>
+                        <i class="bi bi-send"></i>
                     </button>
                 </form>
             </div>

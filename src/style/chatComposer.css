@@ -5,7 +5,6 @@
 
 .menuBarStyle {
     height: auto;
-    grid-area: "composer";
     padding: 2.5%;
     background-color: white;
     box-shadow: var(--chatBarDist) var(--chatBarDist) var(--chatBarBlur) var(--sealGrayShadow);
@@ -17,6 +16,15 @@
     align-items: center;
     max-width: 700px;
     margin: auto;
+    width: 100%;
+}
+
+.mobileContentStyle {
+    display: flex;
+    justify-content: space-between;
+    max-width: 700px;
+    margin: auto;
+    margin-bottom: 1%;
     width: 100%;
 }
 
@@ -36,12 +44,17 @@
     display: flex;
     align-items: center;
     color: white;
+    font-size: 20px;
     background-color: var(--polyGreen);
     margin-left: 2.5%;
-    padding: 10px 15px;
+    padding: 5px 10px;
     border-radius: 30px;
     border: none;
     cursor: pointer;
+}
+
+.sendButtonStyleMobile {
+    margin: 0;
 }
 
 .buttonTextStyle {
