@@ -40,7 +40,7 @@
     border: 1px solid rgba(34, 34, 34, 0.2);
 }
 
-.sendButtonStyle {
+.chatOptStyle {
     display: flex;
     align-items: center;
     color: white;
@@ -53,11 +53,11 @@
     cursor: pointer;
 }
 
-.sendButtonStyleMobile {
+.chatOptStyleMobile {
     margin: 0;
 }
 
-.buttonTextStyle {
+.optTextStyle {
     font-size: 15px;
     font-weight: 600;
     padding: 0;

@@ -81,11 +81,11 @@ export default function ChatComposer({ onSend }) {
                         onChange={onChangeInput}
                     />
                     {/* toggle keyboard */}
-                    <button type="button" className="sendButtonStyle" onClick={() => {console.log("input:", input); setOnscreenKey(!onscreenKey)}}>
+                    <button type="button" className="chatOptStyle" onClick={() => {console.log("input:", input); setOnscreenKey(!onscreenKey)}}>
                         <i class="bi bi-keyboard"></i>
                     </button>
                     {/* toggle speech to text */}
-                    <button type="button" onClick={handleUserSpeaking}className="sendButtonStyle">
+                    <button type="button" onClick={handleUserSpeaking}className="chatOptStyle">
                         <i class="bi bi-mic"></i>
                         <SpeechIn
                             setInput={setInput}
@@ -94,7 +94,7 @@ export default function ChatComposer({ onSend }) {
                         />
                     </button>
                     {/* send button */}
-                    <button type="submit" className="sendButtonStyle">
+                    <button type="submit" className="chatOptStyle">
                         <i class="bi bi-send"></i>
                     </button>
                 </form>
