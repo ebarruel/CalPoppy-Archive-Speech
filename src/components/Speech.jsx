@@ -45,9 +45,29 @@ export function SpeechIn({setInput, userSpeaking, setUserSpeaking}) {
         console.log("Sorry, your browser doesn't support speech-to-text through Web Speech API.");
     }
 
-    // useEffect(() => {
-    //     console.log("Is Poppy listening?", listening);
-    // }, [listening])
+    useEffect(() => {
+        console.log("userSpeaking:", userSpeaking);
+        if (userSpeaking && !listening) {
+            recog.start();
+        }
+        else {
+            recog.stop();
+        }
+    }, [userSpeaking]);
+
+    useEffect(() => {
+        const getResult = () => {
+            const [interIn, setInterIn] = useState("");
+
+            console.log(recog.SpeechRecognitionResultList);
+        }
+
+        window.addEventListener("result", getResult);
+
+        return() => {
+            window.removeEventListener("result", getResult);
+        }
+    }, [])
 
     recog.onerror = ({error}) => {
         console.log(error.message);
@@ -93,25 +113,6 @@ export function SpeechIn({setInput, userSpeaking, setUserSpeaking}) {
     //         } )
     //     }
     // )
-
-    // if (userSpeaking) {
-    //     recog.start();
-    //     console.log("Poppy is listening");
-    // }
-    // else {
-    //     recog.stop();
-    //     console.log("Poppy has stopped listening.");
-    // }
-
-    useEffect(() => {
-        console.log("userSpeaking:", userSpeaking);
-        if (userSpeaking && !listening) {
-            recog.start();
-        }
-        else {
-            recog.stop();
-        }
-    }, [userSpeaking]);
 
     return null;
 }
