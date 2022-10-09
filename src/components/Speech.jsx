@@ -3,6 +3,13 @@ import React, { useState, useEffect, useCallback } from "react";
 /* implemented with Web Speech API: https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API */
 const synth = window.speechSynthesis;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recog = new SpeechRecognition();
+const SpeechRecognitionEvent = window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
+
+if (recog) {
+    // recog.continuous = true; // ????
+    recog.interimResults = true;
+}
 
 /******* TEXT TO SPEECH *******/
 
@@ -30,39 +37,45 @@ export const speechOut = (text) => {
 
 /* borrowed from Mohan Raj: https://www.section.io/engineering-education/speech-recognition-in-javascript/ */
 
-export function SpeechIn(setInput, userSpeaking) {
-    const recog = new SpeechRecognition();
+export function SpeechIn({setInput, userSpeaking, setUserSpeaking}) {
+    const [listening, setListening] = useState(false);
 
     /* check that Web Speech API for STT is supported */
     if (!recog)  {
-        console.log("Sorry, your browser doesn't support speech-to-text through Web Speech API");
-        return;
+        console.log("Sorry, your browser doesn't support speech-to-text through Web Speech API.");
     }
 
-    recog.continuous = true; // ????
-    recog.interimResults = true;
+    // useEffect(() => {
+    //     console.log("Is Poppy listening?", listening);
+    // }, [listening])
 
-    recog.onerror = (error) => {
+    recog.onerror = ({error}) => {
         console.log(error.message);
         return;
     }
 
-    recog.onspeechend = () => {
-        recog.stop();
-        console.log("Poppy has stopped listening.")
+    recog.onaudiostart = () => {
+        setListening(true);
+        console.log("Poppy is listening");
     }
 
-    const useEffect = (e) => {
-        const newResult = (e) => {
-            console.log(e);
-        }
+    recog.onaudioend = () => {
+        setListening(false);
+        setUserSpeaking(false);
+        console.log("Poppy is not listening")
+    }
 
-        window.addEventListener("result", newResult);
+    // const useEffect = (e) => {
+    //     const newResult = (e) => {
+    //         console.log(e);
+    //     }
+
+    //     window.addEventListener("result", newResult);
         
-        return() => {
-            window.removeEventListener("result", newResult);
-        }
-    }
+    //     return() => {
+    //         window.removeEventListener("result", newResult);
+    //     }
+    // }
 
     // useResult(() => 
     //     recog.onresult = (e) => {
@@ -81,14 +94,24 @@ export function SpeechIn(setInput, userSpeaking) {
     //     }
     // )
 
-    if (userSpeaking) {
-        recog.start();
-        console.log("Poppy is listening");
-    }
-    else {
-        recog.stop();
-        console.log("Poppy has stopped listening.");
-    }
+    // if (userSpeaking) {
+    //     recog.start();
+    //     console.log("Poppy is listening");
+    // }
+    // else {
+    //     recog.stop();
+    //     console.log("Poppy has stopped listening.");
+    // }
+
+    useEffect(() => {
+        console.log("userSpeaking:", userSpeaking);
+        if (userSpeaking && !listening) {
+            recog.start();
+        }
+        else {
+            recog.stop();
+        }
+    }, [userSpeaking]);
 
     return null;
 }

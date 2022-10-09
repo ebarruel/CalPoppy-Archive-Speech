@@ -7,6 +7,7 @@ import "../style/text.css";
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import { SpeechIn } from "./Speech";
+import { useEffect } from "react";
 
 export default function ChatComposer({ onSend }) {
     const [input, setInput] = useState("");
@@ -46,10 +47,8 @@ export default function ChatComposer({ onSend }) {
     };
 
     // speech functionality
-    const handleUserSpeaking = userSpeaking => {
-        setUserSpeaking(userSpeaking => !userSpeaking);
-        console.log("userSpeaking:", userSpeaking);
-        // return <SpeechIn setInput={setInput} userSpeaking={userSpeaking} />
+    const handleUserSpeaking = () => {
+        setUserSpeaking(!userSpeaking);
     }
 
     // Takes the message from the content editable field and sends it out
@@ -67,40 +66,34 @@ export default function ChatComposer({ onSend }) {
         return;
     }
 
+    useEffect(() => {
+        console.log("userSpeaking:", userSpeaking);
+    }, [userSpeaking])
+
     return (
         <div>
             <div className="menuBarStyle">
                 <form className="contentStyle" onSubmit={sendMessage}>
+                    {/* text field */}
                     <input
                         className="scrollableY txtFieldStyle"
                         value={input}
                         onChange={onChangeInput}
                     />
+                    {/* toggle keyboard */}
                     <button type="button" className="sendButtonStyle" onClick={() => {console.log("input:", input); setOnscreenKey(!onscreenKey)}}>
                         <i class="bi bi-keyboard"></i>
                     </button>
-                    {/* <SpeechIn
-                        type="button"
-                        onClick={handleUserSpeaking}
-                        className="sendButtonStyle"
-                        setInput={input}
-                        userSpeaking={userSpeaking}
-                    >
+                    {/* toggle speech to text */}
+                    <button type="button" onClick={handleUserSpeaking}className="sendButtonStyle">
                         <i class="bi bi-mic"></i>
-                    </SpeechIn> */}
-                    <button
-                        type="button"
-                        onClick={handleUserSpeaking}
-                        className="sendButtonStyle"
-                    >
-                        <i class="bi bi-mic"></i>
-                        {userSpeaking && (
-                            <SpeechIn
-                                setInput={input}
-                                userSpeaking={userSpeaking}
-                            />
-                        )}
+                        <SpeechIn
+                            setInput={setInput}
+                            userSpeaking={userSpeaking}
+                            setUserSpeaking={setUserSpeaking}
+                        />
                     </button>
+                    {/* send button */}
                     <button type="submit" className="sendButtonStyle">
                         <i class="bi bi-send"></i>
                     </button>
