@@ -79,13 +79,14 @@ export default function ChatComposer({ onSend }) {
                         className="scrollableY txtFieldStyle"
                         value={input}
                         onChange={onChangeInput}
+                        placeholder="Chat with Poppy!"
                     />
                     {/* toggle keyboard */}
-                    <button type="button" className="chatOptStyle" onClick={() => {console.log("input:", input); setOnscreenKey(!onscreenKey)}}>
+                    <button type="button" className={ `chatOptStyle ${onscreenKey ? "chatOptActive" : ""}` } onClick={() => {console.log("input:", input); setOnscreenKey(!onscreenKey)}}>
                         <i class="bi bi-keyboard"></i>
                     </button>
                     {/* toggle speech to text */}
-                    <button type="button" onClick={handleUserSpeaking}className="chatOptStyle">
+                    <button type="button" onClick={handleUserSpeaking}className={`chatOptStyle ${userSpeaking ? "chatOptActive" : ""}`}>
                         <i class="bi bi-mic"></i>
                         <SpeechIn
                             setInput={setInput}
