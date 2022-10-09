@@ -6,8 +6,8 @@ import ChatHeader from "./ChatHeader";
 import funfacts from "./facts.js";
 // import axios from "axios";
 import "../style/chatbot.css";
-import { findAllByDisplayValue } from "@testing-library/react";
-import { Router, Navigate } from 'react-router-dom';
+// import { findAllByDisplayValue } from "@testing-library/react";
+// import { Router, Navigate } from 'react-router-dom';
 
 let suggValue = ["None", "None"];
 
@@ -27,7 +27,7 @@ export function Chatbot(props) {
     const [query, setQuery] = useState("");
     const [conversation, setConversation] = useState([]);
     const [responseCount, setResponseCount] = useState(0); // AI mocking
-    const [initialResponse, setInitialResponse] = useState(0);
+    // const [initialResponse, setInitialResponse] = useState(0);
     const [feedbackReceived, setFeedbackReceived] = useState(0);
     const [suggestionsOpen, setSuggestionsOpen] = useState(false);
 

@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from "react";
+import React from "react";
 import '../style/chatMsg.css';
 import '../style/colors.css';
 import { speechOut } from "./Speech";
