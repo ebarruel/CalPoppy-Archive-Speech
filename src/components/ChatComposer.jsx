@@ -21,7 +21,7 @@ export default function ChatComposer({ onSend }) {
     const [userSpeaking, setUserSpeaking] = useState(false);
 
     // keyboard functionality
-    const onChangeInput = input => {
+    const onChangeKey = input => {
         setInput(input);
         // console.log("Input changed", input);
     };
@@ -39,6 +39,7 @@ export default function ChatComposer({ onSend }) {
     };
 
     const onChange = ({target}) => {
+        console.log(target);
         setInput(target.value);
         console.log("set input to", input)
         keyboard.current.setInput(input);
@@ -47,6 +48,10 @@ export default function ChatComposer({ onSend }) {
     // speech functionality
     const handleUserSpeaking = () => {
         setUserSpeaking(!userSpeaking);
+    }
+
+    const onChangeSpeech = input => {
+        setInput(input);
     }
 
     // Takes the message from the content editable field and sends it out
@@ -80,15 +85,14 @@ export default function ChatComposer({ onSend }) {
                         placeholder="Chat with Poppy!"
                     />
                     {/* toggle keyboard */}
-                    <button type="button" className={ `chatOptStyle ${onscreenKey ? "chatOptActive" : ""}` } onClick={() => {console.log("input:", input); setOnscreenKey(!onscreenKey)}}>
+                    <button type="button" className={ `chatOptStyle ${onscreenKey ? "chatOptActive" : ""}` } onClick={() => {setOnscreenKey(!onscreenKey)}}>
                         <i class="bi bi-keyboard"></i>
                     </button>
                     {/* toggle speech to text */}
                     <button type="button" onClick={handleUserSpeaking}className={`chatOptStyle ${userSpeaking ? "chatOptActive" : ""}`}>
                         <i class="bi bi-mic"></i>
                         <SpeechIn
-                            input={input}
-                            setInput={setInput}
+                            onChange={onChangeSpeech}
                             userSpeaking={userSpeaking}
                             setUserSpeaking={setUserSpeaking}
                         />
@@ -104,7 +108,7 @@ export default function ChatComposer({ onSend }) {
                 <Keyboard
                     keyboardRef={r => (keyboard.current = r)}
                     layoutName={layout}
-                    onChange={onChangeInput}
+                    onChange={onChangeKey}
                     onKeyPress={onKeyPress}
                 />
             </div>

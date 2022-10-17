@@ -37,9 +37,8 @@ export const speechOut = (text) => {
 
 /* borrowed from Mohan Raj: https://www.section.io/engineering-education/speech-recognition-in-javascript/ */
 
-export function SpeechIn({input, setInput, userSpeaking, setUserSpeaking}) {
+export function SpeechIn({onChange, userSpeaking, setUserSpeaking}) {
     const [listening, setListening] = useState(false);
-    const [final, setFinal] = useState("");
 
     /* check that Web Speech API for STT is supported */
     if (!recog)  {
@@ -75,11 +74,9 @@ export function SpeechIn({input, setInput, userSpeaking, setUserSpeaking}) {
     recog.onresult = (event) => {
         let interim = "";
 
-        // console.log(event.results[0][0]);
-
         for (let i = event.resultIndex; i < event.results.length; i++) {
             if (event.results[i].isFinal) {
-                setInput(event.results[i][0].transcript);
+                onChange(event.results[i][0].transcript);
             }
             else {
                 interim += event.results[i][0].transcript;
