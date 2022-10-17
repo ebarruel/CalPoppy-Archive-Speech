@@ -102,14 +102,12 @@ export default function ChatComposer({ onSend }) {
                 </form>
             </div>
 
-            {onscreenKey && (
-                <Keyboard
-                    keyboardRef={r => (keyboard.current = r)}
-                    layoutName={layout}
-                    onChange={onChange}
-                    onKeyPress={onKeyPress}
-                />
-            )}
+            <Keyboard className={` ${ !onscreenKey ? "hidden" : ""} `}
+                keyboardRef={r => (keyboard.current = r)}
+                layoutName={layout}
+                onChange={onChange}
+                onKeyPress={onKeyPress}
+            />
         </div>
     );
 }
