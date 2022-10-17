@@ -89,6 +89,7 @@ export default function ChatComposer({ onSend }) {
                     <button type="button" onClick={handleUserSpeaking}className={`chatOptStyle ${userSpeaking ? "chatOptActive" : ""}`}>
                         <i class="bi bi-mic"></i>
                         <SpeechIn
+                            input={input}
                             setInput={setInput}
                             userSpeaking={userSpeaking}
                             setUserSpeaking={setUserSpeaking}
