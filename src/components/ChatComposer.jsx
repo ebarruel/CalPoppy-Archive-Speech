@@ -19,6 +19,7 @@ export default function ChatComposer({ onSend }) {
 
     // speech variables
     const [userSpeaking, setUserSpeaking] = useState(false);
+    const [speechInput, setSpeechInput] = useState("");
 
     // keyboard functionality
     const onChangeKey = input => {
@@ -50,9 +51,13 @@ export default function ChatComposer({ onSend }) {
         setUserSpeaking(!userSpeaking);
     }
 
-    const onChangeSpeech = input => {
-        setInput(input);
+    const onChangeSpeech = transcript => {
+        setSpeechInput(transcript);
     }
+
+    useEffect(() => {
+        setInput(input.concat(speechInput));
+    }, [speechInput])
 
     // Takes the message from the content editable field and sends it out
     function sendMessage(e) {
