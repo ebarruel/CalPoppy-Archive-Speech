@@ -21,7 +21,7 @@ export default function ChatComposer({ onSend }) {
     const [userSpeaking, setUserSpeaking] = useState(false);
 
     // keyboard functionality
-    const onChange = input => {
+    const onChangeInput = input => {
         setInput(input);
         // console.log("Input changed", input);
     };
@@ -38,7 +38,7 @@ export default function ChatComposer({ onSend }) {
         if (button === "{enter}") sendMessage(e);
     };
 
-    const onChangeInput = ({target}) => {
+    const onChange = ({target}) => {
         setInput(target.value);
         console.log("set input to", input)
         keyboard.current.setInput(input);
@@ -76,7 +76,7 @@ export default function ChatComposer({ onSend }) {
                     <input
                         className="scrollableY txtFieldStyle"
                         value={input}
-                        onChange={onChangeInput}
+                        onChange={onChange}
                         placeholder="Chat with Poppy!"
                     />
                     {/* toggle keyboard */}
@@ -104,7 +104,7 @@ export default function ChatComposer({ onSend }) {
                 <Keyboard
                     keyboardRef={r => (keyboard.current = r)}
                     layoutName={layout}
-                    onChange={onChange}
+                    onChange={onChangeInput}
                     onKeyPress={onKeyPress}
                 />
             </div>
