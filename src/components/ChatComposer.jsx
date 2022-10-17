@@ -69,10 +69,6 @@ export default function ChatComposer({ onSend }) {
         return;
     }
 
-    useEffect(() => {
-        console.log("userSpeaking:", userSpeaking);
-    }, [userSpeaking])
-
     return (
         <div>
             <div className="menuBarStyle">

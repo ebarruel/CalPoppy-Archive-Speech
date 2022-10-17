@@ -55,22 +55,6 @@ export function SpeechIn({onChange, userSpeaking, setUserSpeaking}) {
         }
     }, [userSpeaking]);
 
-    // useEffect(() => {
-    //     const getResult = ({event}) => {
-    //         let interim = "";
-
-    //         console.log(event.results[0][0]);
-    //         interim += event.results[0][0].transcript;
-    //         console.log(interim);
-    //     }
-
-    //     window.addEventListener("result", getResult);
-
-    //     // return() => {
-    //     //     window.removeEventListener("result", getResult);
-    //     // }
-    // }, [])
-
     recog.onresult = (event) => {
         let interim = "";
 
@@ -100,35 +84,6 @@ export function SpeechIn({onChange, userSpeaking, setUserSpeaking}) {
         setUserSpeaking(false);
         console.log("Poppy is not listening")
     }
-
-    // const useEffect = (e) => {
-    //     const newResult = (e) => {
-    //         console.log(e);
-    //     }
-
-    //     window.addEventListener("result", newResult);
-        
-    //     return() => {
-    //         window.removeEventListener("result", newResult);
-    //     }
-    // }
-
-    // useResult(() => 
-    //     recog.onresult = (e) => {
-    //         const [interIn, setInterIn] = useState("");
-
-    //         recog.SpeechRecognitionResultList.item.forEach(result => {
-    //             if (result.isFinal) {
-    //                 /* add interim results to final input */
-    //                 setInput(interIn);
-    //                 setInput(result);
-    //             }
-    //             else {
-    //                 setInterIn(result);
-    //             }
-    //         } )
-    //     }
-    // )
 
     return null;
 }
