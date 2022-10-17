@@ -41,9 +41,7 @@ export default function ChatComposer({ onSend }) {
     const onChangeInput = ({target}) => {
         setInput(target.value);
         console.log("set input to", input)
-        if (onscreenKey) {
-            keyboard.current.setInput(input);
-        }
+        keyboard.current.setInput(input);
     };
 
     // speech functionality
@@ -102,12 +100,14 @@ export default function ChatComposer({ onSend }) {
                 </form>
             </div>
 
-            <Keyboard className={` ${ !onscreenKey ? "hidden" : ""} `}
-                keyboardRef={r => (keyboard.current = r)}
-                layoutName={layout}
-                onChange={onChange}
-                onKeyPress={onKeyPress}
-            />
+            <div className={` ${ !onscreenKey ? "hidden" : "" }`}>
+                <Keyboard
+                    keyboardRef={r => (keyboard.current = r)}
+                    layoutName={layout}
+                    onChange={onChange}
+                    onKeyPress={onKeyPress}
+                />
+            </div>
         </div>
     );
 }
