@@ -15,7 +15,7 @@ Legacy repos:
 
 - https://github.com/calpoly-csai/swanton
 - https://github.com/EdikusRex/CalPoppy
-- https://github.com/ebarruel/CalPoppy-June2022
+- https://github.com/ebarruel/CalPoppy-Archive
 
 ## Getting Started
 
